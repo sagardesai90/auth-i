@@ -27,8 +27,13 @@ bcrypt.hash(this.password, 12, (err, hash) => {
         
         next();
     }
-})
-})
+});
+});
+
+userSchema.methods.validatePassword = function(passwordGuess) {
+    console.log(bcrypt.compare(passwordGuess, this.password));
+    return bcrypt.compare(passwordGuess, this.password)
+};
 
 
 module.exports = mongoose.model('User', userSchema);
